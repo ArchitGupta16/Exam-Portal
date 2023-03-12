@@ -1,12 +1,24 @@
 import {Router} from 'express'
-const router = Router()
+const router = Router();
 
-/** Questions Routes */
+/** import controllers */
+import * as controller from '../controllers/controller.js';
 
-router.get('/questions', (req,res) => {
-    res.json("Questions api get request")
-}
 
-)
+
+/** Questions Routes API*/
+
+// (/questions) is an endpoint
+router.route('/questions')
+            .get(controller.getQuestions)       /** GET Request */
+            .post(controller.insertQuestions)   /** POST Request */
+            .delete(controller.dropQuestions)   /** DELETE Request */
+
+/** Result Routes API */
+
+router.route('/result')
+            .get(controller.getResult)
+            .post(controller.storeResult)
+            .delete(controller.dropResult)
 
 export default router;
